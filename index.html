@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Generator</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; text-align: center; 
+            padding: 50px 20px; background: #ffedf3; color: #d63384;
+        }
+        input { 
+            padding: 12px; width: 80%; max-width: 300px; 
+            border-radius: 25px; border: 2px solid #ff1493; margin-bottom: 20px; 
+            outline: none; font-size: 1rem;
+        }
+        button { 
+            padding: 12px 30px; background: #ff1493; color: white; 
+            border: none; border-radius: 25px; cursor: pointer; 
+            font-weight: bold; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        #resultContainer { margin-top: 30px; display: none; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        #resultLink { word-break: break-all; color: #007bff; text-decoration: none; display: block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Kiske liye banana hai? ❤️</h1>
+    <input type="text" id="nameInput" placeholder="Naam likho yahan...">
+    <br>
+    <button onclick="generateLink()">Link Generate Karo</button>
+
+    <div id="resultContainer">
+        <p>Niche wala link copy karke bhej do:</p>
+        <a id="resultLink" target="_blank"></a>
+    </div>
+
+    <script>
+        function generateLink() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) { alert("Bhai naam toh likho!"); return; }
+            
+            // GitHub ka path automatic detect karne ke liye
+            const currentPath = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+            const finalUrl = currentPath + "play.html?name=" + encodeURIComponent(name);
+            
+            document.getElementById('resultContainer').style.display = "block";
+            const linkTag = document.getElementById('resultLink');
+            linkTag.href = finalUrl;
+            linkTag.innerText = finalUrl;
+        }
+    </script>
+</body>
+</html>
